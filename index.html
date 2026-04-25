@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Virtuoso Studio — Realistic Piano & Trumpet</title>
+<meta name="description" content="Zero-latency web piano and trumpet with realistic samples, mixing, and recording.">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/15.0.4/Tone.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- SPLASH -->
+<div id="splash">
+  <div class="s-logo">🎵 Virtuoso Studio</div>
+  <p class="s-sub">Zero-Latency · Realistic Samples</p>
+  <button id="start-btn">Start Playing</button>
+  <div id="s-status">Click to load instruments</div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <header class="header">
+    <h1 class="brand">🎵 Virtuoso Studio</h1>
+    <div class="toggle-wrap">
+      <button class="tog on" id="tog-piano">🎹 Piano</button>
+      <button class="tog" id="tog-trumpet">🎺 Trumpet</button>
+      <button class="tog" id="tog-mix">🎚️ Mix</button>
+    </div>
+  </header>
+
+  <!-- FX bar -->
+  <div class="fx-bar">
+    <span class="sdot spin" id="sdot"></span>
+    <span id="stext">Loading…</span>
+    <span class="fx-sep">|</span>
+    <button class="fx-btn" id="reverb-btn">🔊 Reverb: OFF</button>
+  </div>
+
+  <!-- Piano hero -->
+  <div class="hero" id="hero-piano">
+    <img src="assets/piano-bg.png" alt="Grand Piano">
+    <span class="hero-lbl">Salamander Grand Piano</span>
+  </div>
+  <!-- Trumpet hero -->
+  <div class="hero" id="hero-trumpet" style="display:none">
+    <img src="assets/trumpet-bg.png" alt="Trumpet">
+    <span class="hero-lbl">FluidR3 GM Trumpet</span>
+  </div>
+
+  <!-- PIANO -->
+  <div id="piano-section">
+    <div class="kb-wrap"><div class="piano-kb" id="piano-kb"></div></div>
+    <div class="hint-bar">Z–M = C3–B3 &nbsp;|&nbsp; Q–I = C4–C5 &nbsp;|&nbsp; S,D,G,H,J / 2,3,5,6,7 = sharps</div>
+  </div>
+
+  <!-- TRUMPET -->
+  <div class="trumpet-area" id="trumpet-section">
+    <div class="t-note-disp" id="t-disp">—</div>
+    <div class="valves">
+      <div class="valve"><div class="valve-btn" id="v1">1</div><div class="valve-lbl">Valve 1</div></div>
+      <div class="valve"><div class="valve-btn" id="v2">2</div><div class="valve-lbl">Valve 2</div></div>
+      <div class="valve"><div class="valve-btn" id="v3">3</div><div class="valve-lbl">Valve 3</div></div>
+    </div>
+    <div class="notes-grid" id="notes-grid"></div>
+    <div class="hint-bar">Every keyboard row maps to one octave chromatically. All notes clickable.</div>
+  </div>
+
+  <!-- MIX MODE -->
+  <div class="mix-area" id="mix-section">
+    <h2 class="mix-title">🎚️ Multitrack Mixer</h2>
+    <p class="mix-sub">Record Piano & Trumpet separately, then play them together</p>
+
+    <div class="mix-track">
+      <div class="mt-label">🎹 Piano Track</div>
+      <div class="mt-controls">
+        <button class="rbtn" id="mix-rec-piano">⏺ Record</button>
+        <button class="rbtn" id="mix-stop-piano" disabled>⏹ Stop</button>
+        <span class="mt-dur" id="mix-dur-piano">Not recorded</span>
+        <button class="rbtn small" id="mix-play-piano" disabled>▶</button>
+        <button class="rbtn small" id="mix-clear-piano" disabled>✕</button>
+      </div>
+    </div>
+
+    <div class="mix-track">
+      <div class="mt-label">🎺 Trumpet Track</div>
+      <div class="mt-controls">
+        <button class="rbtn" id="mix-rec-trumpet">⏺ Record</button>
+        <button class="rbtn" id="mix-stop-trumpet" disabled>⏹ Stop</button>
+        <span class="mt-dur" id="mix-dur-trumpet">Not recorded</span>
+        <button class="rbtn small" id="mix-play-trumpet" disabled>▶</button>
+        <button class="rbtn small" id="mix-clear-trumpet" disabled>✕</button>
+      </div>
+    </div>
+
+    <div class="mix-master">
+      <button class="rbtn accent" id="mix-play-all" disabled>▶ Play Mix Together</button>
+      <button class="rbtn" id="mix-stop-all" disabled>⏹ Stop All</button>
+    </div>
+    <div class="hint-bar">Use the Piano/Trumpet tabs to switch instruments while recording each track</div>
+  </div>
+
+  <!-- QUICK RECORDING -->
+  <div class="rec-section" id="rec-section">
+    <div class="rec-panel">
+      <div class="rec-btns">
+        <button class="rbtn" id="rbtn-rec" disabled>⏺ Record</button>
+        <button class="rbtn" id="rbtn-stop" disabled>⏹ Stop</button>
+        <button class="rbtn" id="rbtn-play" disabled>▶ Play</button>
+        <button class="rbtn" id="rbtn-dl" disabled>⬇ Download</button>
+      </div>
+      <div class="prg-row">
+        <div class="prg-track"><div class="prg-fill" id="prg"></div></div>
+        <div class="timer" id="timer">00:00 / 01:30</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<audio id="playback"></audio>
+<audio id="mix-audio-piano"></audio>
+<audio id="mix-audio-trumpet"></audio>
+<script src="script.js"></script>
+</body>
+</html>

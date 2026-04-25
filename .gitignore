@@ -1,0 +1,16 @@
+# Windows system files
+Thumbs.db
+desktop.ini
+
+# IDE folders
+.vscode/
+.antigravity/
+.idea/
+
+# Local server / Dependency folders
+node_modules/
+.DS_Store
+
+# Temporary recording files (if you save them locally)
+*.wav
+*.webm
